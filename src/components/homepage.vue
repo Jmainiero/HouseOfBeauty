@@ -32,7 +32,88 @@
       </div>
     </div>
 
-    <div class="section--about">
+    <section class="section--offerings">
+      <!-- <div class="row">
+        <div class="col-1-of-3">
+          <img
+            src="../src/../assets/insta/photo-1.jpg"
+            alt="photo 2"
+            class="composition__photo composition__photo--p2"
+          />
+        </div>
+        <div class="col-1-of-3">
+          <img
+            src="../src/../assets/insta/photo-1.jpg"
+            alt="photo 3"
+            class="composition__photo composition__photo--p3"
+          />
+        </div>
+      </div> -->
+      <div class="parentContainer-carousel">
+        <b-carousel
+          id="carousel-1"
+          v-model="slide"
+          controls
+          indicators
+          background="#ababab"
+          img-width="835px"
+          img-height="468px"
+          style="text-shadow: 1px 1px 2px #333"
+          @sliding-start="onSlideStart"
+          @sliding-end="onSlideEnd"
+        >
+          <!-- Text slides with image -->
+          <b-carousel-slide
+            caption="First slide"
+            text="Nulla vitae elit libero, a pharetra augue mollis interdum."
+            img-src="https://scontent-iad3-1.cdninstagram.com/v/t51.2885-15/e35/75538102_747814035720608_2163846815830604742_n.jpg?_nc_ht=scontent-iad3-1.cdninstagram.com&_nc_cat=108&_nc_ohc=t0Mz9-I42rIAX_Z1vSh&_nc_tp=18&oh=12899aae018364b6976ef8a2be15c866&oe=5FB01678"
+          ></b-carousel-slide>
+
+          <!-- Slides with custom text -->
+          <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
+            <h1>Hello world!</h1>
+          </b-carousel-slide>
+
+          <!-- Slides with image only -->
+          <b-carousel-slide
+            img-src="https://picsum.photos/1024/480/?image=58"
+          ></b-carousel-slide>
+
+          <!-- Slides with img slot -->
+          <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
+          <b-carousel-slide>
+            <template v-slot:img>
+              <img
+                class="d-block img-fluid"
+                width="1024"
+                height="480"
+                src="https://picsum.photos/1024/480/?image=55"
+                alt="image slot"
+              />
+            </template>
+          </b-carousel-slide>
+
+          <!-- Slide with blank fluid image to maintain slide aspect ratio -->
+          <b-carousel-slide
+            caption="Blank Image"
+            img-blank
+            img-alt="Blank image"
+          >
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse eros felis, tincidunt a tincidunt eget, convallis vel
+              est. Ut pellentesque ut lacus vel interdum.
+            </p>
+          </b-carousel-slide>
+        </b-carousel>
+
+        <p class="mt-4">
+          Slide #: {{ slide }} <br />
+          Sliding: {{ sliding }}
+        </p>
+      </div>
+    </section>
+    <section class="section--about">
       <div class="row">
         <div class="col-1-of-2">
           <img
@@ -69,28 +150,29 @@
           <!-- <a href="#" class="btn-text">Our Work &rarr;</a> -->
         </div>
       </div>
-    </div>
-
-    <div class="section--offerings">
-      <div class="row">
-        <div class="col-1-of-3">
-          <img
-            src="../src/../assets/insta/photo-1.jpg"
-            alt="photo 2"
-            class="composition__photo composition__photo--p2"
-          />
-        </div>
-        <div class="col-1-of-3">
-          <img
-            src="../src/../assets/insta/photo-1.jpg"
-            alt="photo 3"
-            class="composition__photo composition__photo--p3"
-          />
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 </template>
+
+
+<script>
+export default {
+  data() {
+    return {
+      slide: 0,
+      sliding: null,
+    };
+  },
+  methods: {
+    onSlideStart() {
+      this.sliding = true;
+    },
+    onSlideEnd() {
+      this.sliding = false;
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 @import "../scss_global/_mixins.scss";
@@ -114,16 +196,20 @@ h3 {
   text-transform: uppercase;
 }
 
-img {
-  width: 100%;
-  // box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
-  border-radius: 2px;
-  // position: absolute;
-  z-index: 10;
-  transition: all 0.2s;
-  outline-offset: 1rem;
-  border: 1px solid #5c969e;
-  outline: 1.5px solid #5c969e;
+// img {
+//   width: 100%;
+//   // box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+//   border-radius: 2px;
+//   // position: absolute;
+//   z-index: 10;
+//   transition: all 0.2s;
+//   outline-offset: 1rem;
+//   border: 1px solid #5c969e;
+//   outline: 1.5px solid #5c969e;
+// }
+
+section {
+  padding: 2rem;
 }
 
 .bg-video {
@@ -145,10 +231,12 @@ img {
 }
 .header__container {
   position: relative;
-  height: 95vh;
-  background-image: linear-gradient(to right bottom,
-      rgba(#f67280, 0.3),
-      rgba(#6c5b7b, 1));
+  height: 50vh;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(#f67280, 0.3),
+    rgba(#6c5b7b, 1)
+  );
   background-size: cover;
   background-position: top;
   border-radius: 0 0 0 3rem;
@@ -219,10 +307,15 @@ img {
 }
 
 .section--about {
-  padding: 2rem;
-
   & img {
     width: 70%;
   }
+}
+
+.parentContainer-carousel {
+  display: block;
+  max-width: 50%;
+  max-height: 100% !important;
+  margin: 0 auto;
 }
 </style>
