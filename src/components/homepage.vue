@@ -80,39 +80,16 @@
           </div>
         </section>
         <section class="section--offerings">
-          <h1>What We Offer</h1>
-          <div class="row">
-            <div class="col-1-of-2">
-              <div class="card-hld">
-                <div class="card--details">
-                  <h3>Hair Care</h3>
-                  <ul>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="col-1-of-2">
-              <div class="card-hld">
-                <div class="card--details">
-                  <h3>Hair Care</h3>
-                  <ul>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                    <li>Wash and Blow-Dry | 30</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h1>Services</h1>
+          <table>
+            <tbody>
+              <tr v-for="item in offerings" :key="item">
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.time }}</td>
+              </tr>
+            </tbody>
+          </table>
         </section>
       </div>
     </div>
@@ -121,11 +98,13 @@
 
 
 <script>
+import offerings from "@/components/offerings.js";
 export default {
   data() {
     return {
       slide: 0,
       sliding: null,
+      offerings: offerings,
     };
   },
   methods: {
@@ -143,9 +122,13 @@ export default {
 @import "../scss_global/_mixins.scss";
 @import "../scss_global/_variables.scss";
 @import "../scss_global/_grid.scss";
+
+.row {
+  margin: 0 !important;
+}
 a {
   text-decoration: none;
-  color: white;
+  color: #b1a296;
   display: inline-block;
   transition: 0.2s all;
   // text-transform: uppercase;
@@ -180,8 +163,12 @@ img {
 }
 
 section {
-  padding: 2rem;
+  padding-bottom: 2rem;
   background-color: #ffffff;
+
+  &:not(:last-child) {
+    padding-top: 2rem;
+  }
 }
 
 .bg-video {
@@ -206,8 +193,8 @@ section {
   height: 75vh;
   background-image: linear-gradient(
     to right,
-    rgba(#d6e0f0, 0.6),
-    rgba(#8d93ab, 0.6)
+    rgba(#557a95, 0.6),
+    rgba(#7395ae, 0.6)
   );
   background-size: cover;
   background-position: top;
@@ -289,6 +276,7 @@ section {
   text-align: right;
   padding: 1rem;
   color: #ffffff;
+  background-color: #ffffff;
   // opacity: 0.9;
   // color: black;
 
@@ -330,14 +318,18 @@ section {
   font-family: "Big Shoulders Text", cursive;
   background-color: rgba($color: #f3f3f3, $alpha: 1);
   h1 {
-    padding: 3rem;
+    padding: 2rem;
     font-family: "Big Shoulders Text";
     font-weight: 700;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #557a95;
   }
   h3 {
     text-align: left;
     font-weight: 700;
     text-transform: none;
+    margin-left: 10px;
   }
 
   li {
@@ -345,7 +337,12 @@ section {
     font-size: 1.5rem;
     text-decoration: none;
     list-style: none;
-    color: #7b4916;
+    color: #5d5c61;
+  }
+
+  img {
+    width: 50%;
+    border-radius: 10%;
   }
 }
 
